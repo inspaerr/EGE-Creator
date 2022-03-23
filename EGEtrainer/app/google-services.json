@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "942269978565",
+    "project_id": "ege-trainer",
+    "storage_bucket": "ege-trainer.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:942269978565:android:a265dd44362649e9b59dac",
+        "android_client_info": {
+          "package_name": "ru.blackmirrror.egetrainer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "942269978565-4ieju8dvuc2hfoa58j7983q91uoa3f1k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ru.blackmirrror.egetrainer",
+            "certificate_hash": "7307cbc7641cd5f17bb490f307c8e462a9269f80"
+          }
+        },
+        {
+          "client_id": "942269978565-1vuoq3flcfucjupibht42gcnh68olj7p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBofWhCOsM1eefDpmQIM__eUXYyU7cdPa4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "942269978565-1vuoq3flcfucjupibht42gcnh68olj7p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

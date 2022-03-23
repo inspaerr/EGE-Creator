@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="appInName">Name</string>
+    <string name="appNameAuthor">Author</string>
+    <string name="textBotton">Enter</string>
+</resources>
