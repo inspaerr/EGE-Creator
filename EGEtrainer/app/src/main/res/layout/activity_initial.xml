@@ -5,5 +5,181 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".InitialActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:orientation="vertical"
+        android:gravity="top">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffebee"
+        android:gravity="center"
+        android:text="Привет! Выбери предмет,\n с которого хочешь начать подготовку"
+        android:textColor="#52026E"
+        android:textSize="25sp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="39dp" />
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="25dp"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:columnCount="2"
+        tools:layout_editor_absoluteX="13dp"
+        tools:layout_editor_absoluteY="200dp"
+        android:background="#ffebee">
+
+        <Button
+            android:id="@+id/button_sub_inf"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_width="80dp"
+            android:layout_columnWeight="1"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/botton_sign_in"
+            android:fontFamily="@font/anaheim"
+            android:text="Информатика"
+            android:textSize="13sp"
+            android:textColor="@color/white" />
+        <Button
+            android:id="@+id/button_sub_fiz"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_width="80dp"
+            android:layout_columnWeight="1"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/botton_sign_in"
+            android:fontFamily="@font/anaheim"
+            android:text="Физика"
+            android:textSize="13sp"
+            android:textColor="@color/white" />
+        <Button
+            android:id="@+id/button_sub_biol"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_width="80dp"
+            android:layout_columnWeight="1"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/botton_sign_in"
+            android:fontFamily="@font/anaheim"
+            android:text="Биология"
+            android:textSize="13sp"
+            android:textColor="@color/white" />
+        <Button
+            android:id="@+id/button_sub_eng"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_width="80dp"
+            android:layout_columnWeight="1"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/botton_sign_in"
+            android:fontFamily="@font/anaheim"
+            android:text="Английский"
+            android:textSize="13sp"
+            android:textColor="@color/white" />
+        <Button
+            android:id="@+id/button_sub_chem"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_width="80dp"
+            android:layout_columnWeight="1"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/botton_sign_in"
+            android:fontFamily="@font/anaheim"
+            android:text="Химия"
+            android:textSize="13sp"
+            android:textColor="@color/white" />
+        <Button
+            android:id="@+id/button_sub_math"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_width="80dp"
+            android:layout_columnWeight="1"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/botton_sign_in"
+            android:fontFamily="@font/anaheim"
+            android:text="Математика"
+            android:textSize="13sp"
+            android:textColor="@color/white" />
+        <Button
+            android:id="@+id/button_sub_lit"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_width="80dp"
+            android:layout_columnWeight="1"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/botton_sign_in"
+            android:fontFamily="@font/anaheim"
+            android:text="Литература"
+            android:textSize="13sp"
+            android:textColor="@color/white" />
+        <Button
+            android:id="@+id/button_sub_geo"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="20dp"
+            android:layout_width="80dp"
+            android:layout_columnWeight="1"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/botton_sign_in"
+            android:fontFamily="@font/anaheim"
+            android:text="География"
+            android:textSize="13sp"
+            android:textColor="@color/white" />
+        <Button
+            android:id="@+id/button_sub_hist"
+            android:layout_marginRight="10dp"
+            android:layout_width="80dp"
+            android:layout_columnWeight="1"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/botton_sign_in"
+            android:fontFamily="@font/anaheim"
+            android:text="История"
+            android:textSize="13sp"
+            android:textColor="@color/white" />
+        <Button
+            android:id="@+id/button_sub_ob"
+            android:layout_marginLeft="10dp"
+            android:layout_width="80dp"
+            android:layout_columnWeight="1"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/botton_sign_in"
+            android:fontFamily="@font/anaheim"
+            android:text="Обществознание"
+            android:textSize="11sp"
+            android:textColor="@color/white" />
+
+    </GridLayout>
+
+        <Button
+            android:id="@+id/button_sub_rus"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/botton_sign_in"
+            android:fontFamily="@font/anaheim"
+            android:text="Русский"
+            android:textColor="@color/white"
+            android:textSize="13sp"
+            android:layout_gravity="center" />
+    </LinearLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
