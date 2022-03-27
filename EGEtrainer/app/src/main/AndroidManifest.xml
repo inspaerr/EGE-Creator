@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EGETrainer">
         <activity
+            android:name=".MainActivity2"
+            android:exported="false" />
+        <activity
             android:name=".InitialActivity"
             android:exported="false" />
         <activity
