@@ -1,11 +1,8 @@
 package ru.blackmirrror.egetrainer;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -13,6 +10,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -27,11 +29,17 @@ import ru.blackmirrror.egetrainer.Models.User;
 public class MainActivity extends AppCompatActivity {
 
     Button btnSignIn, btnRegister;
+    SharedPreferences sharedPreferences;
+
     FirebaseAuth auth;
     FirebaseDatabase db;
     DatabaseReference users;
 
     RelativeLayout root;
+
+    private static final String SHARED_PREF_NAME = "mypref";
+    private static final String KEY_EMAIL = "name";
+    private static final String KEY_PASSWORD = "email";
 
 
     @Override
@@ -60,9 +68,21 @@ public class MainActivity extends AppCompatActivity {
                 showSignInWindow();
             }
         });
+
+        sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
+
+        String name = sharedPreferences.getString(KEY_EMAIL, null);
+
+        if (name != null){
+            //ToDo заменить класс Temp на Search
+            Intent intent = new Intent(MainActivity.this, TempActivity.class);
+            startActivity(intent);
+        }
+
     }
 
     private void showSignInWindow() {
+
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setTitle("Enter");
         dialog.setMessage("Enter your date");
@@ -73,6 +93,52 @@ public class MainActivity extends AppCompatActivity {
 
         final EditText email = signInWindow.findViewById(R.id.emailField);
         final EditText password = signInWindow.findViewById(R.id.passwordField);
+        Button remember = signInWindow.findViewById(R.id.remember_btn);
+        sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
+
+        remember.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString(KEY_EMAIL, email.getText().toString());
+                editor.putString(KEY_PASSWORD, password.getText().toString());
+                Toast.makeText(MainActivity.this, "Remember successfully", Toast.LENGTH_SHORT).show();
+                editor.apply();
+            }
+        });
+
+        //CheckBox remember = findViewById(R.id.checkBoxRemember);
+
+        /*SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
+        String checkbox = preferences.getString("remember", "");
+        if (checkbox.equals("true")){
+            //ToDo заменить класс Temp на Search
+            Intent intent = new Intent(MainActivity.this, TempActivity.class);
+            startActivity(intent);
+        }
+        else if (checkbox.equals("false")) {
+            Toast.makeText(this, "Please Sign In", Toast.LENGTH_SHORT).show();
+        }
+
+        remember.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (buttonView.isChecked()){
+                    SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("remember", "true");
+                    editor.apply();
+                    Toast.makeText(MainActivity.this, "Checked", Toast.LENGTH_SHORT).show();
+                }
+                else if (!buttonView.isChecked()){
+                    SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("remember", "false");
+                    editor.apply();
+                    Toast.makeText(MainActivity.this, "Unchecked", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });*/
 
         dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
@@ -97,7 +163,8 @@ public class MainActivity extends AppCompatActivity {
                         .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                             @Override
                             public void onSuccess(AuthResult authResult) {
-                                startActivity(new Intent(MainActivity.this, InitialActivity.class));
+                                //ToDo заменить класс Temp на Search
+                                startActivity(new Intent(MainActivity.this, TempActivity.class));
                                 finish();
                             }
                         }).addOnFailureListener(new OnFailureListener() {

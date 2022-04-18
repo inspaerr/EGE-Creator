@@ -3,10 +3,22 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/ekate/AndroidStudioProjects/EGEtrainer/EGE-Creator/EGEtrainer/app/src/main/res/drawable/bottom_selector.xml" value="0.2537037037037037" />
         <entry key="..\:/Users/ekate/AndroidStudioProjects/EGEtrainer/EGE-Creator/EGEtrainer/app/src/main/res/drawable/botton_sign_in.xml" value="0.2601851851851852" />
+        <entry key="..\:/Users/ekate/AndroidStudioProjects/EGEtrainer/EGE-Creator/EGEtrainer/app/src/main/res/font/anaheim.xml" value="0.16041666666666668" />
+        <entry key="..\:/Users/ekate/AndroidStudioProjects/EGEtrainer/EGE-Creator/EGEtrainer/app/src/main/res/layout/activity_initial.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ekate/AndroidStudioProjects/EGEtrainer/EGE-Creator/EGEtrainer/app/src/main/res/layout/activity_main.xml" value="0.33738191632928477" />
+        <entry key="..\:/Users/ekate/AndroidStudioProjects/EGEtrainer/EGE-Creator/EGEtrainer/app/src/main/res/layout/activity_main2.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/ekate/AndroidStudioProjects/EGEtrainer/EGE-Creator/EGEtrainer/app/src/main/res/layout/activity_search.xml" value="0.264" />
+        <entry key="..\:/Users/ekate/AndroidStudioProjects/EGEtrainer/EGE-Creator/EGEtrainer/app/src/main/res/layout/activity_temp.xml" value="0.13020833333333334" />
+        <entry key="..\:/Users/ekate/AndroidStudioProjects/EGEtrainer/EGE-Creator/EGEtrainer/app/src/main/res/layout/fragment_account.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/ekate/AndroidStudioProjects/EGEtrainer/EGE-Creator/EGEtrainer/app/src/main/res/layout/fragment_achievements.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/ekate/AndroidStudioProjects/EGEtrainer/EGE-Creator/EGEtrainer/app/src/main/res/layout/fragment_favorite.xml" value="0.23072916666666668" />
+        <entry key="..\:/Users/ekate/AndroidStudioProjects/EGEtrainer/EGE-Creator/EGEtrainer/app/src/main/res/layout/fragment_search.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ekate/AndroidStudioProjects/EGEtrainer/EGE-Creator/EGEtrainer/app/src/main/res/layout/register_window.xml" value="0.264" />
-        <entry key="..\:/Users/ekate/AndroidStudioProjects/EGEtrainer/EGE-Creator/EGEtrainer/app/src/main/res/layout/sign_in_window.xml" value="0.13020833333333334" />
+        <entry key="..\:/Users/ekate/AndroidStudioProjects/EGEtrainer/EGE-Creator/EGEtrainer/app/src/main/res/layout/sign_in_window.xml" value="0.264" />
+        <entry key="..\:/Users/ekate/AndroidStudioProjects/EGEtrainer/EGE-Creator/EGEtrainer/app/src/main/res/menu/bottom_menu.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/ekate/AndroidStudioProjects/EGEtrainer/EGE-Creator/EGEtrainer/app/src/main/res/menu/menu_subjects.xml" value="0.1265625" />
         <entry key="..\:/Users/koser/Desktop/ege creator/EGE-Creator/EGEtrainer/app/src/main/res/layout/activity_initial.xml" value="0.1" />
         <entry key="..\:/Users/koser/Desktop/ege creator/EGE-Creator/EGEtrainer/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/koser/Desktop/ege creator/EGE-Creator/EGEtrainer/app/src/main/res/layout/activity_main2.xml" value="0.1" />
