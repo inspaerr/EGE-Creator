@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_search"
+        android:icon="@drawable/ic_item_search"
+        android:title="Search" />
+
+    <item
+        android:id="@+id/navigation_favorite"
+        android:icon="@drawable/ic_item_favorite"
+        android:title="Favorite" />
+
+    <item
+        android:id="@+id/navigation_achievements"
+        android:icon="@drawable/ic_item_achievements"
+        android:title="Achievements" />
+
+    <item
+        android:id="@+id/navigation_account"
+        android:icon="@drawable/ic_item_account"
+        android:title="Account" />
+
+</menu>

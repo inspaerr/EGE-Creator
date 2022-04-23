@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (name != null){
             //ToDo заменить класс Temp на Search
-            Intent intent = new Intent(MainActivity.this, TempActivity.class);
+            Intent intent = new Intent(MainActivity.this, SearchNewActivity.class);
             startActivity(intent);
         }
 
@@ -164,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess(AuthResult authResult) {
                                 //ToDo заменить класс Temp на Search
-                                startActivity(new Intent(MainActivity.this, TempActivity.class));
+                                startActivity(new Intent(MainActivity.this, SearchNewActivity.class));
                                 finish();
                             }
                         }).addOnFailureListener(new OnFailureListener() {

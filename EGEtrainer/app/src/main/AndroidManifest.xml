@@ -10,10 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EGETrainer">
         <activity
-            android:name=".TempActivity"
-            android:exported="false" />
+            android:name=".SearchNewActivity"
+            android:exported="false"
+            android:label="@string/title_activity_search_new" />
         <activity
-            android:name=".SearchActivity"
+            android:name=".TempActivity"
             android:exported="false" />
         <activity
             android:name=".InitialActivity"
