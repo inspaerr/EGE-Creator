@@ -10,13 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EGETrainer">
         <activity
+            android:name=".ChoiserActivity"
+            android:exported="false" />
+        <activity
             android:name=".ResultActivity"
             android:exported="false" />
         <activity
             android:name=".Questions2Activity"
-            android:exported="false" />
-        <activity
-            android:name=".QuestionsActivity"
             android:exported="false" />
         <activity
             android:name=".SearchNewActivity"

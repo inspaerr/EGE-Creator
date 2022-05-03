@@ -36,7 +36,7 @@ public class ResultActivity extends AppCompatActivity {
 
         TableLayout tableLayout = (TableLayout) findViewById(R.id.table);
 
-        for (int i = 0; i < ROWS; i++) {
+        for (int i = 0; i < ROWS+1; i++) {
 
             TableRow tableRow = new TableRow(this);
             tableRow.setLayoutParams(new TableLayout.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
@@ -52,7 +52,7 @@ public class ResultActivity extends AppCompatActivity {
                     if (i == 0) textView.setText("Ваш ответ");
                     else {
                         textView.setText(answersYour.get(i-1));
-                        if (answers.get(i).equals(answersYour.get(i-1))) {
+                        if (answers.get(i-1).equals(answersYour.get(i-1))) {
                             textView.setBackgroundResource(R.drawable.correct_answer);
                         } else {
                             textView.setBackgroundResource(R.drawable.correct_no_answer);

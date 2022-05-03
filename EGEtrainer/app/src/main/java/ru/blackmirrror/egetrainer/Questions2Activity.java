@@ -3,9 +3,13 @@ package ru.blackmirrror.egetrainer;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -18,13 +22,19 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import ru.blackmirrror.egetrainer.Models.DatabaseHelper;
 import ru.blackmirrror.egetrainer.Models.Question;
+import ru.blackmirrror.egetrainer.Models.QuizContract;
 import ru.blackmirrror.egetrainer.Models.QuizDbHelper;
 
 public class Questions2Activity extends AppCompatActivity implements View.OnClickListener{
+
+    private DatabaseHelper mDBHelper;
+    private SQLiteDatabase mDb;
 
     private static final long COUNTDOWN_IN_MILLIS = 14400000;
     private CountDownTimer countDownTimer;
@@ -49,9 +59,51 @@ public class Questions2Activity extends AppCompatActivity implements View.OnClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questions2);
+
+        mDBHelper = new DatabaseHelper(this);
+
+        try {
+            mDBHelper.updateDataBase();
+        } catch (IOException mIOException) {
+            throw new Error("UnableToUpdateDatabase");
+        }
+
+        try {
+            mDb = mDBHelper.getWritableDatabase();
+        } catch (SQLException mSQLException) {
+            throw mSQLException;
+        }
+
         showTimer();
         setUpUI();
         startTest();
+    }
+
+    @SuppressLint("Range")
+    public ArrayList<Question> getAllQuestions(String subj) {
+
+        ArrayList<Question> questionList = new ArrayList<>();
+
+        String[] selectionArgs = new String[]{subj};
+        Cursor cursor = mDb.rawQuery("SELECT * FROM " + QuizContract.QuestionTable.TABLE_NAME +
+                " WHERE " + QuizContract.QuestionTable.SUBJECT + " = ?", selectionArgs);
+
+        if (cursor.moveToFirst()) {
+            do {
+
+                Question question = new Question();
+                question.setTextQuestion(cursor.getString(cursor.getColumnIndex(QuizContract.QuestionTable.COLUMN_QUESTION)));
+                question.setAnswer(cursor.getString(cursor.getColumnIndex(QuizContract.QuestionTable.ANSWER)));
+                question.setSubject(cursor.getString(cursor.getColumnIndex(QuizContract.QuestionTable.SUBJECT)));
+                question.setNumberQuestion(cursor.getInt(cursor.getColumnIndex(QuizContract.QuestionTable.NUMBER_QUESTION)));
+                question.setNumberNumberQuestion(cursor.getInt(cursor.getColumnIndex(QuizContract.QuestionTable.NUMBER_NUMBER_QUESTION)));
+
+                questionList.add(question);
+
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return questionList;
     }
 
     private void setUpUI() {
@@ -75,10 +127,11 @@ public class Questions2Activity extends AppCompatActivity implements View.OnClic
     }
 
     private void fetchDbHelper(){
-        QuizDbHelper quizDbHelper = new QuizDbHelper(this);
+        //QuizDbHelper quizDbHelper = new QuizDbHelper(this);
         Bundle arguments = getIntent().getExtras();
         String sub = arguments.getString("sub");
-        questionArrayList = quizDbHelper.getAllQuestions(sub);
+        //questionArrayList = quizDbHelper.getAllQuestions(sub);
+        questionArrayList = getAllQuestions(sub);
     }
 
     private void startTest(){
@@ -86,6 +139,7 @@ public class Questions2Activity extends AppCompatActivity implements View.OnClic
             next.setText("Закончить");
         else
             next.setText("Далее");
+        if (questionTotalCount == 0) return;
         currentQuestion = questionArrayList.get(questionCounter);
         question.setText(currentQuestion.getTextQuestion());
         answer.setText(answers.get(questionCounter));
@@ -155,7 +209,7 @@ public class Questions2Activity extends AppCompatActivity implements View.OnClic
                 timeLeftMillis = 0;
                 updateTimer();
                 countDownTimer.cancel();
-                showResult();
+                onResActivity();
             }
         }.start();
     }
@@ -188,14 +242,7 @@ public class Questions2Activity extends AppCompatActivity implements View.OnClic
         dialog.setPositiveButton("Да", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                //TODO активность
-                Intent intent = new Intent(Questions2Activity.this, ResultActivity.class);
-                intent.putExtra("questionTotalCount", questionTotalCount);
-                for (int i = 0; i < questionTotalCount; i++) {
-                    intent.putExtra("a" + i, questionArrayList.get(i).getAnswer());
-                    intent.putExtra("ay" + i, answers.get(i));
-                }
-                startActivity(intent);
+                onResActivity();
             }
         });
 
@@ -208,6 +255,17 @@ public class Questions2Activity extends AppCompatActivity implements View.OnClic
 
         dialog.show();
 
+    }
+
+    private void onResActivity(){
+        //TODO активность
+        Intent intent = new Intent(Questions2Activity.this, ResultActivity.class);
+        intent.putExtra("questionTotalCount", questionTotalCount);
+        for (int i = 0; i < questionTotalCount; i++) {
+            intent.putExtra("a" + i, questionArrayList.get(i).getAnswer());
+            intent.putExtra("ay" + i, answers.get(i));
+        }
+        startActivity(intent);
     }
 
     private void showMenu(int count){
