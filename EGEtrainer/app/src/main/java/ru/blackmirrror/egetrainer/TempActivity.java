@@ -26,12 +26,14 @@ public class TempActivity extends AppCompatActivity {
 
         textViewEmail = findViewById(R.id.textViewEmail);
         textViewPassword = findViewById(R.id.textViewPassword);
+
         logout_btn = findViewById(R.id.logout);
 
         sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
 
         String email = sharedPreferences.getString(KEY_EMAIL, null);
         String password = sharedPreferences.getString(KEY_PASSWORD, null);
+        
 
         if (email != null || password != null){
             textViewEmail.setText("Email: "+ email);

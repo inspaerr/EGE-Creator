@@ -22,12 +22,26 @@ import ru.blackmirrror.egetrainer.R;
 import ru.blackmirrror.egetrainer.TempActivity;
 import ru.blackmirrror.egetrainer.databinding.FragmentAccountBinding;
 
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+
+
+import ru.blackmirrror.egetrainer.Models.User;
+
 public class AccountFragment extends Fragment {
 
     private AccountViewModel accountViewModel;
     private FragmentAccountBinding binding;
 
-    TextView textViewEmail, textViewPassword;
+    TextView textViewEmail, textViewPassword, textViewFirstName, textViewLastName, textViewName;
+
     Button logout_btn;
     SharedPreferences sharedPreferences;
 
@@ -41,19 +55,44 @@ public class AccountFragment extends Fragment {
 
         binding = FragmentAccountBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
-        final TextView textView = binding.textAccount;
-        accountViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
-
         textViewEmail = root.findViewById(R.id.textViewEmail);
         textViewPassword = root.findViewById(R.id.textViewPassword);
         logout_btn = root.findViewById(R.id.logout);
+       // textViewFirstName = root.findViewById(R.id.textViewFirstName);
+        // textViewLastName = root.findViewById(R.id.textViewLastName);
+        textViewName = root.findViewById(R.id.textViewName);
 
+        // Получаем юзера и его поля итд
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference users = database.getReference("Users");
+        DatabaseReference uidRef = users.child(uid);
+        uidRef.addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        User user = dataSnapshot.getValue(User.class);
+                        if (user != null) {
+                            textViewEmail.setText(user.getEmail());
+                            textViewName.setText(user.getFirstName() + " " + user.getLastName());
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                });
+
+
+        /* final TextView textView = binding.textAccount;
+        accountViewModel.getText().
+
+                observe(getViewLifecycleOwner(), new Observer<String>() {
+                    @Override
+                    public void onChanged(@Nullable String s) {
+                        textView.setText(s);
+                    }
+                });*/
         //SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
         sharedPreferences = getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE);
 
@@ -62,10 +101,13 @@ public class AccountFragment extends Fragment {
         String email = sharedPreferences.getString(KEY_EMAIL, null);
         String password = sharedPreferences.getString(KEY_PASSWORD, null);
 
-        if (email != null || password != null){
-            textViewEmail.setText("Email: "+ email);
-            textViewPassword.setText("Password: "+ password);
+        if (email != null || password != null) {
+            textViewEmail.setText("Email: " + email);
+            textViewPassword.setText("Password: " + password);
         }
+
+
+        //textViewFirstName.setText(user.getFirstName());
 
         logout_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,6 +122,8 @@ public class AccountFragment extends Fragment {
 
         return root;
     }
+
+
 
     @Override
     public void onDestroyView() {

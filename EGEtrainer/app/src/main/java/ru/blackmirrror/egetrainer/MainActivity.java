@@ -23,6 +23,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.auth.FirebaseUser;
 
 import ru.blackmirrror.egetrainer.Models.User;
 
@@ -37,9 +38,12 @@ public class MainActivity extends AppCompatActivity {
 
     RelativeLayout root;
 
+
     private static final String SHARED_PREF_NAME = "mypref";
     private static final String KEY_EMAIL = "name";
     private static final String KEY_PASSWORD = "email";
+    //private static final String KEY_FIRST_NAME = "First_name";
+
 
 
     @Override
@@ -72,8 +76,8 @@ public class MainActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
 
         String name = sharedPreferences.getString(KEY_EMAIL, null);
-
-        if (name != null){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null){
             //ToDo заменить класс Temp на Search
             Intent intent = new Intent(MainActivity.this, SearchNewActivity.class);
             startActivity(intent);
@@ -179,6 +183,7 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
     }
 
+
     private void shoeRegisterWindow() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setTitle("Register");
@@ -199,6 +204,7 @@ public class MainActivity extends AppCompatActivity {
                 dialogInterface.dismiss();
             }
         });
+
 
         dialog.setPositiveButton("Add", new DialogInterface.OnClickListener() {
             @Override
@@ -232,14 +238,13 @@ public class MainActivity extends AppCompatActivity {
                                 user.setLastName(lastName.getText().toString());
                                 user.setEmail(email.getText().toString());
                                 user.setPass(password.getText().toString());
-
                                 users.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user)
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void unused) {
-                                        Snackbar.make(root, "You are registered", Snackbar.LENGTH_SHORT).show();
-                                    }
-                                }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onSuccess(Void unused) {
+                                                Snackbar.make(root, "You are registered", Snackbar.LENGTH_SHORT).show();
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
                                         Snackbar.make(root, "Error", Snackbar.LENGTH_SHORT).show();
@@ -250,9 +255,10 @@ public class MainActivity extends AppCompatActivity {
                         });
             }
         });
-
         dialog.show();
-
     }
+
+
+
 
 }
