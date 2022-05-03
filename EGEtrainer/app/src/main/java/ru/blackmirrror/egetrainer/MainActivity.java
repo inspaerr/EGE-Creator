@@ -25,11 +25,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.auth.FirebaseUser;
 
-import ru.blackmirrror.egetrainer.Models.User;
+import ru.blackmirrror.egetrainer.Models.*;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btnSignIn, btnRegister;
+    Button btnSignIn, btnRegister, btnRemember;
     SharedPreferences sharedPreferences;
 
     FirebaseAuth auth;
@@ -40,9 +40,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     private static final String SHARED_PREF_NAME = "mypref";
-    private static final String KEY_EMAIL = "name";
-    private static final String KEY_PASSWORD = "email";
-    //private static final String KEY_FIRST_NAME = "First_name";
+    private static final String KEY_EMAIL = "email";
+    private static final String KEY_PASSWORD = "pass";
 
 
 
@@ -97,10 +96,10 @@ public class MainActivity extends AppCompatActivity {
 
         final EditText email = signInWindow.findViewById(R.id.emailField);
         final EditText password = signInWindow.findViewById(R.id.passwordField);
-        Button remember = signInWindow.findViewById(R.id.remember_btn);
+        btnRemember = signInWindow.findViewById(R.id.remember_btn);
         sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
 
-        remember.setOnClickListener(new View.OnClickListener() {
+        btnRemember.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -111,9 +110,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //CheckBox remember = findViewById(R.id.checkBoxRemember);
+        //CheckBox remembe = findViewById(R.id.checkBoxRemembe);
+        /*if (remembe.isChecked()){
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString(KEY_EMAIL, email.getText().toString());
+            editor.putString(KEY_PASSWORD, password.getText().toString());
+            Toast.makeText(MainActivity.this, "Remember successfully", Toast.LENGTH_SHORT).show();
+            editor.apply();
+        }
+        else {
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.clear();
+            editor.commit();
+            Toast.makeText(MainActivity.this, "Log out successfully", Toast.LENGTH_SHORT).show();
+            finish();
+        }*/
+        /*CheckBox remember = findViewById(R.id.checkBoxRemembe);
 
-        /*SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
+        SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
         String checkbox = preferences.getString("remember", "");
         if (checkbox.equals("true")){
             //ToDo заменить класс Temp на Search
@@ -122,24 +136,24 @@ public class MainActivity extends AppCompatActivity {
         }
         else if (checkbox.equals("false")) {
             Toast.makeText(this, "Please Sign In", Toast.LENGTH_SHORT).show();
-        }
+        }*/
 
-        remember.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        /*remembe.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (buttonView.isChecked()){
-                    SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.putString("remember", "true");
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString(KEY_EMAIL, email.getText().toString());
+                    editor.putString(KEY_PASSWORD, password.getText().toString());
+                    Toast.makeText(MainActivity.this, "Remember successfully", Toast.LENGTH_SHORT).show();
                     editor.apply();
-                    Toast.makeText(MainActivity.this, "Checked", Toast.LENGTH_SHORT).show();
                 }
                 else if (!buttonView.isChecked()){
-                    SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.putString("remember", "false");
-                    editor.apply();
-                    Toast.makeText(MainActivity.this, "Unchecked", Toast.LENGTH_SHORT).show();
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.clear();
+                    editor.commit();
+                    Toast.makeText(MainActivity.this, "Log out successfully", Toast.LENGTH_SHORT).show();
+                    finish();
                 }
             }
         });*/
