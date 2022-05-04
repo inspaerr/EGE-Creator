@@ -39,7 +39,32 @@
             android:textColor="@color/grey"
             tools:ignore="MissingConstraints"
             android:textAlignment="center"/>
-
+        <LinearLayout
+            android:id="@+id/PasswordLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/ChangePasswordField"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Пароль"
+                android:inputType="textPassword"
+                android:minHeight="48dp"
+                android:text=""
+                android:textColor="@color/black"
+                android:textColorHighlight="@color/teal_700"
+                android:textSize="20sp"
+                android:layout_gravity="left"
+                ></EditText>
+            <Button
+                android:id="@+id/ChangePasswordButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Изменить пароль"
+                android:layout_gravity="right">
+            </Button>
+        </LinearLayout>
     </LinearLayout>
 
     <FrameLayout

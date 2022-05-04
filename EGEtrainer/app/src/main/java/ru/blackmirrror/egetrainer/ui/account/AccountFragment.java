@@ -3,6 +3,7 @@ package ru.blackmirrror.egetrainer.ui.account;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Context.*;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,10 +12,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.view.LayoutInflater;
+import android.widget.LinearLayout;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.view.LayoutInflater;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,9 +44,12 @@ public class AccountFragment extends Fragment {
     private AccountViewModel accountViewModel;
     private FragmentAccountBinding binding;
 
+    private static User user;
+
     TextView textViewEmail, textViewPassword, textViewFirstName, textViewLastName, textViewName;
 
-    Button logout_btn;
+    EditText password_field;
+    Button logout_btn, change_password;
     SharedPreferences sharedPreferences;
 
     private static final String SHARED_PREF_NAME = "mypref";
@@ -58,16 +65,24 @@ public class AccountFragment extends Fragment {
         textViewEmail = root.findViewById(R.id.textViewEmail);
         textViewPassword = root.findViewById(R.id.textViewPassword);
         logout_btn = root.findViewById(R.id.logout);
-       // textViewFirstName = root.findViewById(R.id.textViewFirstName);
+        change_password = root.findViewById(R.id.ChangePasswordButton);
+        password_field = root.findViewById(R.id.ChangePasswordField);
+        // textViewFirstName = root.findViewById(R.id.textViewFirstName);
         // textViewLastName = root.findViewById(R.id.textViewLastName);
         textViewName = root.findViewById(R.id.textViewName);
 
+        LinearLayout mainLayout;
+
+        // Get your layout set up, this is just an example
+        mainLayout = root.findViewById(R.id.PasswordLayout);
+
         // Получаем юзера и его поля итд
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        String uid = user.getUid();
         DatabaseReference users = database.getReference("Users");
         DatabaseReference uidRef = users.child(uid);
-        uidRef.addListenerForSingleValueEvent(
+        uidRef.addValueEventListener(
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -76,6 +91,7 @@ public class AccountFragment extends Fragment {
                             textViewEmail.setText(user.getEmail());
                             textViewName.setText(user.getFirstName() + " " + user.getLastName());
                         }
+                        AccountFragment.user = user;
                     }
 
                     @Override
@@ -119,10 +135,25 @@ public class AccountFragment extends Fragment {
                 getActivity().finish();
             }
         });
+        change_password.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        User user = AccountFragment.user;
+                        String new_pass = password_field.getText().toString();
+                        user.setPass(new_pass);
+                        uidRef.setValue(user);
+                        // System.out.println(user.getFirstName());
+                        // Then just use the following:
+                        InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(mainLayout.getWindowToken(), 0);
+                    }
+                }
+        );
+
 
         return root;
     }
-
 
 
     @Override
