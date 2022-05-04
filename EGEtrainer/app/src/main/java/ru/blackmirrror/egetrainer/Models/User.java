@@ -1,6 +1,7 @@
 package ru.blackmirrror.egetrainer.Models;
 
 public class User {
+    //public static Object firstName;
     private String firstName, lastName, email, pass;
 
     public User(String firstName, String lastName, String email, String pass){
