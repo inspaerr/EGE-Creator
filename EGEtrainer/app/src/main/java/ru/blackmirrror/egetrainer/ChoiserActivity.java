@@ -99,6 +99,8 @@ public class ChoiserActivity extends AppCompatActivity {
                             public void onClick(View v) {
                                 Intent intent = new Intent(ChoiserActivity.this, Questions2Activity.class);
                                 intent.putExtra("sub", subject);
+                                intent.putExtra("choice", choice);
+                                intent.putExtra("number", textView.getText().toString());
                                 startActivity(intent);
                             }
                         });

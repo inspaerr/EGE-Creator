@@ -14,6 +14,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,6 +34,8 @@ import ru.blackmirrror.egetrainer.Models.QuizContract;
 import ru.blackmirrror.egetrainer.Models.QuizDbHelper;
 
 public class Questions2Activity extends AppCompatActivity implements View.OnClickListener{
+
+    private static final String TAG = "MY_APP";
 
     private DatabaseHelper mDBHelper;
     private SQLiteDatabase mDb;
@@ -52,6 +56,7 @@ public class Questions2Activity extends AppCompatActivity implements View.OnClic
     int questionTotalCount;
     Question currentQuestion;
     String an;
+    String subjectt, choicee, numberr;
 
     private Handler handler = new Handler();
 
@@ -80,13 +85,25 @@ public class Questions2Activity extends AppCompatActivity implements View.OnClic
     }
 
     @SuppressLint("Range")
-    public ArrayList<Question> getAllQuestions(String subj) {
+    public ArrayList<Question> getAllQuestions(String subj, String choi, String numb) {
 
         ArrayList<Question> questionList = new ArrayList<>();
+        Cursor cursor;
 
-        String[] selectionArgs = new String[]{subj};
-        Cursor cursor = mDb.rawQuery("SELECT * FROM " + QuizContract.QuestionTable.TABLE_NAME +
-                " WHERE " + QuizContract.QuestionTable.SUBJECT + " = ?", selectionArgs);
+        String[] selectionArgs = new String[]{subj,numb};
+
+        if (choi.equals("variant")) {
+            cursor = mDb.rawQuery("SELECT * FROM " + QuizContract.QuestionTable.TABLE_NAME +
+                    " WHERE " + QuizContract.QuestionTable.SUBJECT + " = ?" +
+                    " AND " + QuizContract.QuestionTable.NUMBER_NUMBER_QUESTION + " = ?", selectionArgs);
+        }
+        else {
+            cursor = mDb.rawQuery("SELECT * FROM " + QuizContract.QuestionTable.TABLE_NAME +
+                    " WHERE " + QuizContract.QuestionTable.SUBJECT + " = ?" +
+                    " AND " + QuizContract.QuestionTable.NUMBER_QUESTION + " = ?", selectionArgs);
+        }
+        /*cursor = mDb.rawQuery("SELECT * FROM " + QuizContract.QuestionTable.TABLE_NAME +
+                " WHERE " + QuizContract.QuestionTable.SUBJECT + " = ?", selectionArgs);*/
 
         if (cursor.moveToFirst()) {
             do {
@@ -128,10 +145,14 @@ public class Questions2Activity extends AppCompatActivity implements View.OnClic
 
     private void fetchDbHelper(){
         //QuizDbHelper quizDbHelper = new QuizDbHelper(this);
+        String del;
         Bundle arguments = getIntent().getExtras();
-        String sub = arguments.getString("sub");
+        subjectt = arguments.getString("sub");
+        choicee = arguments.getString("choice");
+        numberr = arguments.getString("number");
+        numberr = numberr.substring(8, numberr.length());
         //questionArrayList = quizDbHelper.getAllQuestions(sub);
-        questionArrayList = getAllQuestions(sub);
+        questionArrayList = getAllQuestions(subjectt, choicee, numberr);
     }
 
     private void startTest(){
@@ -155,6 +176,8 @@ public class Questions2Activity extends AppCompatActivity implements View.OnClic
                     startTest();
                 }
                 else {
+                    an = answer.getText().toString();
+                    answers.set(questionCounter, an);
                     showResult();
                 }
             }
