@@ -27,4 +27,43 @@
         android:layout_marginEnd="317dp"
         android:gravity="center"
         android:text="Logout" />
+
+    <ImageView
+        android:id="@+id/imv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"/>
+
+    <Button
+        android:id="@+id/temp"
+        android:layout_width="380dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="317dp"
+        android:gravity="center"
+        android:text="Click" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ProgressBar
+            android:id="@+id/pb_horizontal"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="@color/prim_btn1"
+            android:scrollbarSize="80dp"
+            android:saveEnabled="false"
+            android:layout_centerInParent="true"/>
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="188dp"
+            android:layout_marginBottom="14dp"
+            android:layout_centerInParent="true"
+            android:text="0%" />
+    </RelativeLayout>
+
 </LinearLayout>

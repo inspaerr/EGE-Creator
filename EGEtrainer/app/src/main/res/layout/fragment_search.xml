@@ -42,9 +42,11 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
                         android:layout_weight="1"
-                        android:text=" Математика  базовая "
+                        android:text="Математика базовая"
                         android:textColor="@color/white"
-                        android:textSize="10dp" />
+                        android:background="@drawable/botton_sign_in"
+                        android:textSize="16dp" />
+
 
                     <Button
                         android:id="@+id/btnMathProf"
@@ -54,7 +56,8 @@
                         android:layout_weight="1"
                         android:text="Математика профильная"
                         android:textColor="@color/white"
-                        android:textSize="10dp" />
+                        android:background="@drawable/botton_sign_in"
+                        android:textSize="16dp" />
                 </TableRow>
 
                 <TableRow
@@ -69,7 +72,8 @@
                         android:layout_weight="1"
                         android:text="Информатика"
                         android:textColor="@color/white"
-                        android:textSize="10dp" />
+                        android:background="@drawable/botton_sign_in"
+                        android:textSize="16dp" />
 
                     <Button
                         android:id="@+id/btnPhis"
@@ -79,7 +83,8 @@
                         android:layout_weight="1"
                         android:text="Физика"
                         android:textColor="@color/white"
-                        android:textSize="10dp" />
+                        android:background="@drawable/botton_sign_in"
+                        android:textSize="16dp" />
                 </TableRow>
 
                 <TableRow
@@ -94,7 +99,8 @@
                         android:layout_weight="1"
                         android:text="Русский язык"
                         android:textColor="@color/white"
-                        android:textSize="10dp" />
+                        android:background="@drawable/botton_sign_in"
+                        android:textSize="16dp" />
 
                     <Button
                         android:id="@+id/btnEng"
@@ -104,7 +110,8 @@
                         android:layout_weight="1"
                         android:text="Английский язык"
                         android:textColor="@color/white"
-                        android:textSize="10dp" />
+                        android:background="@drawable/botton_sign_in"
+                        android:textSize="16dp" />
                 </TableRow>
 
                 <TableRow
@@ -119,7 +126,8 @@
                         android:layout_weight="1"
                         android:text="История"
                         android:textColor="@color/white"
-                        android:textSize="10dp" />
+                        android:background="@drawable/botton_sign_in"
+                        android:textSize="16dp" />
 
                     <Button
                         android:id="@+id/btnSoc"
@@ -129,7 +137,8 @@
                         android:layout_weight="1"
                         android:text="Обществознание"
                         android:textColor="@color/white"
-                        android:textSize="10dp" />
+                        android:background="@drawable/botton_sign_in"
+                        android:textSize="16dp" />
                 </TableRow>
 
                 <TableRow
@@ -144,7 +153,8 @@
                         android:layout_weight="1"
                         android:text="Биология"
                         android:textColor="@color/white"
-                        android:textSize="10dp" />
+                        android:background="@drawable/botton_sign_in"
+                        android:textSize="16dp" />
 
                     <Button
                         android:id="@+id/btnChem"
@@ -154,7 +164,8 @@
                         android:layout_weight="1"
                         android:text="Химия"
                         android:textColor="@color/white"
-                        android:textSize="10dp" />
+                        android:background="@drawable/botton_sign_in"
+                        android:textSize="16dp" />
                 </TableRow>
 
                 <TableRow
@@ -169,7 +180,8 @@
                         android:layout_weight="1"
                         android:text="Литература"
                         android:textColor="@color/white"
-                        android:textSize="10dp" />
+                        android:background="@drawable/botton_sign_in"
+                        android:textSize="16dp" />
 
                     <Button
                         android:id="@+id/btnGeog"
@@ -179,7 +191,8 @@
                         android:layout_weight="1"
                         android:text="География"
                         android:textColor="@color/white"
-                        android:textSize="10dp" />
+                        android:background="@drawable/botton_sign_in"
+                        android:textSize="16dp" />
                 </TableRow>
             </TableLayout>
         </LinearLayout>

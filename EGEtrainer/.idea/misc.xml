@@ -6,7 +6,11 @@
         <entry key="..\:/Users/ekate/AndroidStudioProjects/EGEtrainer/EGE-Creator/EGEtrainer/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2638888888888889" />
         <entry key="..\:/Users/ekate/AndroidStudioProjects/EGEtrainer/EGE-Creator/EGEtrainer/app/src/main/res/drawable-v24/number_question_finish.xml" value="0.2638888888888889" />
         <entry key="..\:/Users/ekate/AndroidStudioProjects/EGEtrainer/EGE-Creator/EGEtrainer/app/src/main/res/drawable/bottom_selector.xml" value="0.2537037037037037" />
+        <entry key="..\:/Users/ekate/AndroidStudioProjects/EGEtrainer/EGE-Creator/EGEtrainer/app/src/main/res/drawable/botton_main.xml" value="0.26615384615384613" />
         <entry key="..\:/Users/ekate/AndroidStudioProjects/EGEtrainer/EGE-Creator/EGEtrainer/app/src/main/res/drawable/botton_sign_in.xml" value="0.2601851851851852" />
+        <entry key="..\:/Users/ekate/AndroidStudioProjects/EGEtrainer/EGE-Creator/EGEtrainer/app/src/main/res/drawable/botton_task.xml" value="0.26615384615384613" />
+        <entry key="..\:/Users/ekate/AndroidStudioProjects/EGEtrainer/EGE-Creator/EGEtrainer/app/src/main/res/drawable/botton_task_clicked.xml" value="0.26256410256410256" />
+        <entry key="..\:/Users/ekate/AndroidStudioProjects/EGEtrainer/EGE-Creator/EGEtrainer/app/src/main/res/drawable/botton_task_unclicked.xml" value="0.26615384615384613" />
         <entry key="..\:/Users/ekate/AndroidStudioProjects/EGEtrainer/EGE-Creator/EGEtrainer/app/src/main/res/drawable/correct_answer.xml" value="0.2638888888888889" />
         <entry key="..\:/Users/ekate/AndroidStudioProjects/EGEtrainer/EGE-Creator/EGEtrainer/app/src/main/res/drawable/correct_no_answer.xml" value="0.2638888888888889" />
         <entry key="..\:/Users/ekate/AndroidStudioProjects/EGEtrainer/EGE-Creator/EGEtrainer/app/src/main/res/drawable/ic_baseline_done_all_24.xml" value="0.2601851851851852" />
@@ -15,6 +19,8 @@
         <entry key="..\:/Users/ekate/AndroidStudioProjects/EGEtrainer/EGE-Creator/EGEtrainer/app/src/main/res/drawable/ic_item_account.xml" value="0.2638888888888889" />
         <entry key="..\:/Users/ekate/AndroidStudioProjects/EGEtrainer/EGE-Creator/EGEtrainer/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2638888888888889" />
         <entry key="..\:/Users/ekate/AndroidStudioProjects/EGEtrainer/EGE-Creator/EGEtrainer/app/src/main/res/drawable/number_question.xml" value="0.26296296296296295" />
+        <entry key="..\:/Users/ekate/AndroidStudioProjects/EGEtrainer/EGE-Creator/EGEtrainer/app/src/main/res/drawable/task_done.xml" value="0.26256410256410256" />
+        <entry key="..\:/Users/ekate/AndroidStudioProjects/EGEtrainer/EGE-Creator/EGEtrainer/app/src/main/res/drawable/task_no_done.xml" value="0.26256410256410256" />
         <entry key="..\:/Users/ekate/AndroidStudioProjects/EGEtrainer/EGE-Creator/EGEtrainer/app/src/main/res/font/anaheim.xml" value="0.16041666666666668" />
         <entry key="..\:/Users/ekate/AndroidStudioProjects/EGEtrainer/EGE-Creator/EGEtrainer/app/src/main/res/layout/activity_choiser.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ekate/AndroidStudioProjects/EGEtrainer/EGE-Creator/EGEtrainer/app/src/main/res/layout/activity_initial.xml" value="0.25416666666666665" />
@@ -22,10 +28,10 @@
         <entry key="..\:/Users/ekate/AndroidStudioProjects/EGEtrainer/EGE-Creator/EGEtrainer/app/src/main/res/layout/activity_main2.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ekate/AndroidStudioProjects/EGEtrainer/EGE-Creator/EGEtrainer/app/src/main/res/layout/activity_questions.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ekate/AndroidStudioProjects/EGEtrainer/EGE-Creator/EGEtrainer/app/src/main/res/layout/activity_questions2.xml" value="0.264" />
-        <entry key="..\:/Users/ekate/AndroidStudioProjects/EGEtrainer/EGE-Creator/EGEtrainer/app/src/main/res/layout/activity_result.xml" value="0.13020833333333334" />
+        <entry key="..\:/Users/ekate/AndroidStudioProjects/EGEtrainer/EGE-Creator/EGEtrainer/app/src/main/res/layout/activity_result.xml" value="0.264" />
         <entry key="..\:/Users/ekate/AndroidStudioProjects/EGEtrainer/EGE-Creator/EGEtrainer/app/src/main/res/layout/activity_search.xml" value="0.264" />
         <entry key="..\:/Users/ekate/AndroidStudioProjects/EGEtrainer/EGE-Creator/EGEtrainer/app/src/main/res/layout/activity_search_new.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/ekate/AndroidStudioProjects/EGEtrainer/EGE-Creator/EGEtrainer/app/src/main/res/layout/activity_temp.xml" value="0.13020833333333334" />
+        <entry key="..\:/Users/ekate/AndroidStudioProjects/EGEtrainer/EGE-Creator/EGEtrainer/app/src/main/res/layout/activity_temp.xml" value="0.4" />
         <entry key="..\:/Users/ekate/AndroidStudioProjects/EGEtrainer/EGE-Creator/EGEtrainer/app/src/main/res/layout/fragment_account.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ekate/AndroidStudioProjects/EGEtrainer/EGE-Creator/EGEtrainer/app/src/main/res/layout/fragment_achievements.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ekate/AndroidStudioProjects/EGEtrainer/EGE-Creator/EGEtrainer/app/src/main/res/layout/fragment_dashboard.xml" value="0.13020833333333334" />

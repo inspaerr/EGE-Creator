@@ -1,5 +1,6 @@
 package ru.blackmirrror.egetrainer;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,18 +12,27 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -39,14 +49,18 @@ public class Questions2Activity extends AppCompatActivity implements View.OnClic
 
     private DatabaseHelper mDBHelper;
     private SQLiteDatabase mDb;
+    FirebaseStorage storage;
+    StorageReference storageRef;
 
     private static final long COUNTDOWN_IN_MILLIS = 14400000;
     private CountDownTimer countDownTimer;
     private long timeLeftMillis;
 
-    TextView timer, question, questionNumber, tf;
+    TextView timer, question, questionNumber;
+    ImageView tf;
     EditText answer;
     Button next, before;
+    ImageView imageQuestion;
 
     ArrayList<TextView> textViewArrayList;
 
@@ -130,6 +144,7 @@ public class Questions2Activity extends AppCompatActivity implements View.OnClic
         timer = findViewById(R.id.tvTime);
         question = findViewById(R.id.tvQuestion);
         questionNumber = findViewById(R.id.tvNumberQuestion);
+        imageQuestion = findViewById(R.id.imvQuection);
 
         tf = findViewById(R.id.tvFinish);
 
@@ -155,6 +170,30 @@ public class Questions2Activity extends AppCompatActivity implements View.OnClic
         questionArrayList = getAllQuestions(subjectt, choicee, numberr);
     }
 
+    private void showPictureQuestion(int num) {
+        storage = FirebaseStorage.getInstance();
+        storageRef = storage.getReferenceFromUrl("gs://ege-trainer.appspot.com");
+        String select;
+
+        if (choicee.equals("variant"))
+            select = subjectt + "/" + num + "/" + numberr + ".png";
+        else
+            select = subjectt + "/" + numberr + "/" + num + ".png";
+        storageRef.child(select).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+
+                Picasso.with(Questions2Activity.this).load(uri)
+                        .into(imageQuestion);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                Toast.makeText(getApplicationContext(), "Ошибка!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     private void startTest(){
         if (questionCounter == questionTotalCount-1)
             next.setText("Закончить");
@@ -163,6 +202,8 @@ public class Questions2Activity extends AppCompatActivity implements View.OnClic
         if (questionTotalCount == 0) return;
         currentQuestion = questionArrayList.get(questionCounter);
         question.setText(currentQuestion.getTextQuestion());
+        imageQuestion.setImageResource(0);
+        showPictureQuestion(questionCounter+1);
         answer.setText(answers.get(questionCounter));
         questionNumber.setText("Задача "+(questionCounter+1));
 
@@ -296,7 +337,7 @@ public class Questions2Activity extends AppCompatActivity implements View.OnClic
 
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        layoutParams.setMargins(4,4,4, 0);
+        layoutParams.setMargins(4,4,4, 8);
 
         textViewArrayList = new ArrayList<TextView>();
 
@@ -304,6 +345,7 @@ public class Questions2Activity extends AppCompatActivity implements View.OnClic
             TextView textView = new TextView(this);
             textView.setText(""+(i+1));
             textView.setTextColor(Color.WHITE);
+            textView.setGravity(Gravity.CENTER);
             textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
             textView.setBackgroundResource(R.drawable.number_question);
             textView.setLayoutParams(layoutParams);

@@ -2,11 +2,16 @@ package ru.blackmirrror.egetrainer;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -42,6 +47,8 @@ public class ChoiserActivity extends AppCompatActivity {
         variants.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                variants.setBackgroundResource(R.drawable.botton_task_clicked);
+                tasks.setBackgroundResource(R.drawable.botton_task_unclicked);
                 showLayout("variant");
             }
         });
@@ -49,6 +56,8 @@ public class ChoiserActivity extends AppCompatActivity {
         tasks.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                variants.setBackgroundResource(R.drawable.botton_task_unclicked);
+                tasks.setBackgroundResource(R.drawable.botton_task_clicked);
                 showLayout("task");
             }
         });
@@ -69,7 +78,7 @@ public class ChoiserActivity extends AppCompatActivity {
 
         int ROWS;
         if (choice == "variant")
-            ROWS = 20;
+            ROWS = 5;
         else
             ROWS = questionTotalCount;
         int COLUMNS = 2;
@@ -82,17 +91,35 @@ public class ChoiserActivity extends AppCompatActivity {
                 TableRow tableRow = new TableRow(this);
                 tableRow.setLayoutParams(new TableLayout.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
                         TableLayout.LayoutParams.WRAP_CONTENT));
-                //tableRow.setBackgroundResource(R.drawable.shelf);
+                tableRow.setGravity(Gravity.CENTER);
+                tableRow.setPadding(0,16,0,0);
 
                 for (int j = 0; j < COLUMNS; j++) {
                     if (temp > 0) {
+                        LinearLayout linearLayout = new LinearLayout(this);
+                        linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+                        linearLayout.setGravity(Gravity.CENTER);
+
+                        ImageView imageView = new ImageView(this);
+                        imageView.setImageResource(R.drawable.ic_baseline_done_all_24);
+                        imageView.setBackgroundResource(R.drawable.task_no_done);
+
                         TextView textView = new TextView(this);
                         if (choice == "variant")
                             textView.setText("Вариант "+(ROWS-temp+1));
                         else
                             textView.setText("Задание "+(ROWS-temp+1));
 
-                        tableRow.addView(textView, j);
+                        textView.setTextColor(Color.BLACK);
+                        textView.setTextSize(20);
+                        textView.setGravity(Gravity.CENTER);
+                        textView.setPadding(32, 0, 32, 0);
+
+                        linearLayout.addView(imageView);
+                        linearLayout.addView(textView);
+
+                        //tableRow.addView(textView, j);
+                        tableRow.addView(linearLayout, j);
 
                         textView.setOnClickListener(new View.OnClickListener() {
                             @Override

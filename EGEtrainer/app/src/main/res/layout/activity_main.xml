@@ -65,8 +65,9 @@
             android:layout_weight="1"
             android:background="@drawable/botton_sign_in"
             android:fontFamily="@font/anaheim"
-            android:text="@string/buttonSignIn"
-            android:textColor="@color/black" />
+            android:text="Войти"
+            android:textColor="@color/white"
+            android:textStyle="bold"/>
 
         <Button
             android:id="@+id/buttonRegister"
@@ -76,8 +77,9 @@
             android:layout_weight="1"
             android:background="@drawable/botton_sign_in"
             android:fontFamily="@font/anaheim"
-            android:text="@string/buttonRegister"
-            android:textColor="@color/black" />
+            android:text="Регистрация"
+            android:textColor="@color/white"
+            android:textStyle="bold"/>
     </LinearLayout>
 
 </RelativeLayout>
