@@ -19,8 +19,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -52,6 +57,9 @@ public class Questions2Activity extends AppCompatActivity implements View.OnClic
     int questionTotalCount;
     Question currentQuestion;
     String an;
+
+    ImageButton imageButton;
+    boolean flag = true;
 
     private Handler handler = new Handler();
 
@@ -107,6 +115,7 @@ public class Questions2Activity extends AppCompatActivity implements View.OnClic
     }
 
     private void setUpUI() {
+        imageButton = findViewById(R.id.imButton);
         next = findViewById(R.id.btnAfter);
         before = findViewById(R.id.btnBefore);
         answer = findViewById(R.id.etAnswer);
@@ -124,6 +133,8 @@ public class Questions2Activity extends AppCompatActivity implements View.OnClic
         answers = new ArrayList<String>();
         for (int i = 0; i < questionTotalCount; i++)
             answers.add("");
+
+
     }
 
     private void fetchDbHelper(){
@@ -135,6 +146,10 @@ public class Questions2Activity extends AppCompatActivity implements View.OnClic
     }
 
     private void startTest(){
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+
         if (questionCounter == questionTotalCount-1)
             next.setText("Закончить");
         else
@@ -144,6 +159,26 @@ public class Questions2Activity extends AppCompatActivity implements View.OnClic
         question.setText(currentQuestion.getTextQuestion());
         answer.setText(answers.get(questionCounter));
         questionNumber.setText("Задача "+(questionCounter+1));
+
+        flag = true;
+        imageButton.setImageResource(R.drawable.ic_baseline_favorite_border_24);
+        imageButton.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                // меняем изображение на кнопке
+                if (flag) {
+                    String query = "INSERT INTO " + QuizContract.FavouriteTable.TABLE_NAME_2 + "(" + QuizContract.FavouriteTable.USER_UID + ", " + QuizContract.FavouriteTable.QUESTION_ID  + ") "
+                            + "VALUES " + "(" + user.getUid() + ", " + QuizContract.QuestionTable._ID + ")";
+                    imageButton.setImageResource(R.drawable.ic_baseline_favorite_24);
+                    mDb.rawQuery(query, null);
+                }
+                else
+                    // возвращаем первую картинку
+                    imageButton.setImageResource(R.drawable.ic_baseline_favorite_border_24);
+                flag = !flag;
+            }
+        });
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override

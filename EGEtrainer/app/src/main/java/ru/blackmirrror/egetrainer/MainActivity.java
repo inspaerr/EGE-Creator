@@ -188,6 +188,7 @@ public class MainActivity extends AppCompatActivity {
                         }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
+                        System.out.println(e.toString());
                         Snackbar.make(root, "Error", Snackbar.LENGTH_SHORT).show();
                     }
                 });
