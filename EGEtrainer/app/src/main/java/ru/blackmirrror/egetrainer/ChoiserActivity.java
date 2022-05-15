@@ -20,6 +20,10 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import ru.blackmirrror.egetrainer.Models.DoneTasks;
+import ru.blackmirrror.egetrainer.Models.RemDbHelper;
+import ru.blackmirrror.egetrainer.Models.Task;
+
 public class ChoiserActivity extends AppCompatActivity {
 
     TextView variants, tasks, before;
@@ -29,6 +33,8 @@ public class ChoiserActivity extends AppCompatActivity {
     int questionTotalCount;
     String[] subjects = {"mathBase", "mathProf", "rus", "eng", "inf", "phis", "soc", "his", "bio", "chem", "geog", "leat"};
     int[] questionTotalCounts = {21, 18, 27, 44, 27, 30, 25, 19, 28, 34, 31, 12};
+
+    RemDbHelper remDbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +49,8 @@ public class ChoiserActivity extends AppCompatActivity {
         Bundle arguments = getIntent().getExtras();
         subject = arguments.getString("sub");
         questionTotalCount =questionTotalCounts[Arrays.asList(subjects).indexOf(subject)];
+
+        remDbHelper = new RemDbHelper(this);
 
         variants.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,13 +110,18 @@ public class ChoiserActivity extends AppCompatActivity {
 
                         ImageView imageView = new ImageView(this);
                         imageView.setImageResource(R.drawable.ic_baseline_done_all_24);
-                        imageView.setBackgroundResource(R.drawable.task_no_done);
 
                         TextView textView = new TextView(this);
                         if (choice == "variant")
                             textView.setText("Вариант "+(ROWS-temp+1));
                         else
                             textView.setText("Задание "+(ROWS-temp+1));
+
+                        //if (done(subject, choice, textView.getText().toString().substring(8)))
+                        if (done2(subject, choice, textView.getText().toString().substring(8)))
+                            imageView.setBackgroundResource(R.drawable.task_no_done);
+                        else
+                            imageView.setBackgroundResource(R.drawable.task_done);
 
                         textView.setTextColor(Color.BLACK);
                         textView.setTextSize(20);
@@ -128,6 +141,12 @@ public class ChoiserActivity extends AppCompatActivity {
                                 intent.putExtra("sub", subject);
                                 intent.putExtra("choice", choice);
                                 intent.putExtra("number", textView.getText().toString());
+
+                                String num = textView.getText().toString().substring(8);
+                                Task task = new Task(subject, choice, num);
+                                DoneTasks.done.add(task);
+                                //remDbHelper.addTask(task);
+
                                 startActivity(intent);
                             }
                         });
@@ -138,5 +157,24 @@ public class ChoiserActivity extends AppCompatActivity {
                 tableLayout.addView(tableRow, i);
             }
         }
+    }
+
+    private boolean done2(String subject, String choice, String substring) {
+        for (int i = 0; i < DoneTasks.done.size(); i++){
+            if (DoneTasks.done.get(i).getSubject().equals(subject)){
+                if (DoneTasks.done.get(i).getTask().equals(choice)){
+                    if (DoneTasks.done.get(i).getNumber().equals(substring))
+                        return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    private boolean done(String sub, String cho, String num) {
+        ArrayList<Task> tasks = remDbHelper.getAllTasks(sub, cho, num);
+        if (tasks.isEmpty())
+            return true;
+        return false;
     }
 }

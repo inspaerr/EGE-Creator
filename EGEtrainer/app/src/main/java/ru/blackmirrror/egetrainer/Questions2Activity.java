@@ -23,11 +23,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-<<<<<<< HEAD
 import android.widget.ImageView;
-=======
 import android.widget.ImageButton;
->>>>>>> main
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;

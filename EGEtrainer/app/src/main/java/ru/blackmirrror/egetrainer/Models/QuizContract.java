@@ -30,5 +30,14 @@ public final class QuizContract {
         public static final String QUESTION_ID = "QUESTION_ID";
         public static final String QUESTION_SUBJ = "QUESTION_SUBJ";
     }
+    public static class RemTable implements BaseColumns {
+
+        public static final String TABLE_NAME = "tasks";
+        public static final String _ID = "_id";
+        public static final String SUBJECT = "subject";
+        public static final String TASK = "task";
+        public static final String NUMBER = "number";
+        //public static final String UID = "uid";
+    }
 
 }
