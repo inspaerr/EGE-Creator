@@ -49,6 +49,12 @@
         <entry key="..\:/Users/koser/Desktop/ege creator/EGE-Creator/EGEtrainer/app/src/main/res/layout/activity_initial.xml" value="0.1" />
         <entry key="..\:/Users/koser/Desktop/ege creator/EGE-Creator/EGEtrainer/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/koser/Desktop/ege creator/EGE-Creator/EGEtrainer/app/src/main/res/layout/activity_main2.xml" value="0.1" />
+<<<<<<< HEAD
+=======
+        <entry key="..\:/Users/koser/Desktop/ege creator/EGE-Creator/EGEtrainer/app/src/main/res/layout/fragment_account.xml" value="0.1" />
+        <entry key="..\:/Users/koser/Desktop/ege creator/EGE-Creator/EGEtrainer/app/src/main/res/layout/fragment_favorite.xml" value="0.14447463768115942" />
+        <entry key="..\:/Users/koser/Desktop/ege creator/EGE-Creator/EGEtrainer/app/src/main/res/layout/register_window.xml" value="0.1" />
+>>>>>>> main
       </map>
     </option>
   </component>

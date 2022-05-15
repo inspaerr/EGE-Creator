@@ -39,32 +39,114 @@
             android:textColor="@color/grey"
             tools:ignore="MissingConstraints"
             android:textAlignment="center"/>
-        <LinearLayout
-            android:id="@+id/PasswordLayout"
+
+        <RelativeLayout
+            android:id="@+id/LastnameLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
             <EditText
-                android:id="@+id/ChangePasswordField"
+                android:id="@+id/ChangeLastname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Пароль"
-                android:inputType="textPassword"
+                android:hint="Фамилия"
+                android:inputType="text"
+                android:minHeight="48dp"
+                android:text=""
+                android:textColor="@color/black"
+                android:textColorHighlight="@color/teal_700"
+                android:textSize="20sp"
+                android:layout_marginLeft="50px"
+                android:width="500px"
+                ></EditText>
+            <Button
+                android:id="@+id/ChangeLastnameButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Изменить фамилию"
+                android:layout_gravity="right"
+                android:layout_marginRight="50px"
+                android:layout_alignParentRight="true"
+                android:width="400px">
+            </Button>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/FirstnameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+            <EditText
+                android:id="@+id/ChangeFirstname"
+                android:width="500px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Имя"
+                android:inputType="text"
                 android:minHeight="48dp"
                 android:text=""
                 android:textColor="@color/black"
                 android:textColorHighlight="@color/teal_700"
                 android:textSize="20sp"
                 android:layout_gravity="left"
+                android:layout_marginLeft="50px"
                 ></EditText>
+
+            <Button
+                android:id="@+id/ChangeFirstnameButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="right"
+                android:layout_marginRight="50px"
+                android:width="400px"
+                android:text="Изменить имя"></Button>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/PasswordLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <EditText
+                android:id="@+id/ChangePasswordField"
+                android:width="500px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Пароль"
+                android:inputType="textPassword"
+                android:text=""
+                android:textColor="@color/black"
+                android:textColorHighlight="@color/teal_700"
+                android:textSize="20sp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="50px"
+                ></EditText>
+
             <Button
                 android:id="@+id/ChangePasswordButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Изменить пароль"
-                android:layout_gravity="right">
+                android:layout_gravity="end"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="50px"
+                android:width="400px">
             </Button>
-        </LinearLayout>
+        </RelativeLayout>
     </LinearLayout>
 
     <FrameLayout

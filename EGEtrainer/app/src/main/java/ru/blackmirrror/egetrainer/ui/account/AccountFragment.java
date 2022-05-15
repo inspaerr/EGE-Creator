@@ -19,6 +19,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.view.LayoutInflater;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,8 +49,8 @@ public class AccountFragment extends Fragment {
 
     TextView textViewEmail, textViewPassword, textViewFirstName, textViewLastName, textViewName;
 
-    EditText password_field;
-    Button logout_btn, change_password;
+    EditText password_field, firstname_field, lastname_field;
+    Button logout_btn, change_password, change_firstname, change_lastname;
     SharedPreferences sharedPreferences;
 
     private static final String SHARED_PREF_NAME = "mypref";
@@ -67,11 +68,18 @@ public class AccountFragment extends Fragment {
         logout_btn = root.findViewById(R.id.logout);
         change_password = root.findViewById(R.id.ChangePasswordButton);
         password_field = root.findViewById(R.id.ChangePasswordField);
+
+        change_firstname = root.findViewById(R.id.ChangeFirstnameButton);
+        firstname_field = root.findViewById(R.id.ChangeFirstname);
+
+        change_lastname = root.findViewById(R.id.ChangeLastnameButton);
+        lastname_field = root.findViewById(R.id.ChangeLastname);
+
         // textViewFirstName = root.findViewById(R.id.textViewFirstName);
         // textViewLastName = root.findViewById(R.id.textViewLastName);
         textViewName = root.findViewById(R.id.textViewName);
 
-        LinearLayout mainLayout;
+        RelativeLayout mainLayout;
 
         // Get your layout set up, this is just an example
         mainLayout = root.findViewById(R.id.PasswordLayout);
@@ -90,6 +98,8 @@ public class AccountFragment extends Fragment {
                         if (user != null) {
                             textViewEmail.setText(user.getEmail());
                             textViewName.setText(user.getFirstName() + " " + user.getLastName());
+                            firstname_field.setText(user.getFirstName());
+                            lastname_field.setText(user.getLastName());
                         }
                         AccountFragment.user = user;
                     }
@@ -139,9 +149,26 @@ public class AccountFragment extends Fragment {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        User user = AccountFragment.user;
+                        // User user = AccountFragment.user;
                         String new_pass = password_field.getText().toString();
-                        user.setPass(new_pass);
+                        FirebaseUser fuser = FirebaseAuth.getInstance().getCurrentUser();
+                        fuser.updatePassword(new_pass);
+                        // user.setPass(new_pass);
+                        // uidRef.setValue(user);
+                        // System.out.println(user.getFirstName());
+                        // Then just use the following:
+                        InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(mainLayout.getWindowToken(), 0);
+                    }
+                }
+        );
+        change_lastname.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        User user = AccountFragment.user;
+                        String new_lastname = lastname_field.getText().toString();
+                        user.setLastName(new_lastname);
                         uidRef.setValue(user);
                         // System.out.println(user.getFirstName());
                         // Then just use the following:
@@ -150,7 +177,21 @@ public class AccountFragment extends Fragment {
                     }
                 }
         );
-
+        change_firstname.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        User user = AccountFragment.user;
+                        String new_firstname = firstname_field.getText().toString();
+                        user.setFirstName(new_firstname);
+                        uidRef.setValue(user);
+                        // System.out.println(user.getFirstName());
+                        // Then just use the following:
+                        InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(mainLayout.getWindowToken(), 0);
+                    }
+                }
+        );
 
         return root;
     }

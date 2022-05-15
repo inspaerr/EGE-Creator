@@ -21,7 +21,14 @@ public final class QuizContract {
         public static final String SUBJECT = "subject";
         public static final String NUMBER_QUESTION = "num_question";
         public static final String NUMBER_NUMBER_QUESTION = "num_num_question";
-
+        public static final String _ID = "_id";
+    }
+    public static class FavouriteTable implements BaseColumns {
+        public static final String TABLE_NAME_2 = "favourite_tasks";
+        public static final String COLUMN_ID = "ID";
+        public static final String USER_UID = "USERUID";
+        public static final String QUESTION_ID = "QUESTION_ID";
+        public static final String QUESTION_SUBJ = "QUESTION_SUBJ";
     }
 
 }
