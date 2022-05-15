@@ -155,9 +155,10 @@ public class ChoiserActivity extends AppCompatActivity {
                                 DoneTasks.done.add(task);
 
                                 SharedPreferences.Editor editor = mSettings.edit();
-                                editor.putString(strForPref, strForPref);
-                                editor.apply();
-
+                                if(!mSettings.contains(strForPref)) {
+                                    editor.putString(strForPref, strForPref);
+                                    editor.apply();
+                                }
                                 //remDbHelper.addTask(task);
 
                                 startActivity(intent);
