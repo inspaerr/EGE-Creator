@@ -3,7 +3,9 @@ package ru.blackmirrror.egetrainer;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ActionBar;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
@@ -19,6 +21,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import ru.blackmirrror.egetrainer.Models.DoneTasks;
 import ru.blackmirrror.egetrainer.Models.RemDbHelper;
@@ -35,6 +38,8 @@ public class ChoiserActivity extends AppCompatActivity {
     int[] questionTotalCounts = {21, 18, 27, 44, 27, 30, 25, 19, 28, 34, 31, 12};
 
     RemDbHelper remDbHelper;
+    public static final String APP_PREFERENCES = "doneTasks";
+    SharedPreferences mSettings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +56,8 @@ public class ChoiserActivity extends AppCompatActivity {
         questionTotalCount =questionTotalCounts[Arrays.asList(subjects).indexOf(subject)];
 
         remDbHelper = new RemDbHelper(this);
+
+        mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
 
         variants.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,7 +151,13 @@ public class ChoiserActivity extends AppCompatActivity {
 
                                 String num = textView.getText().toString().substring(8);
                                 Task task = new Task(subject, choice, num);
+                                String strForPref = subject + choice + num;
                                 DoneTasks.done.add(task);
+
+                                SharedPreferences.Editor editor = mSettings.edit();
+                                editor.putString(strForPref, strForPref);
+                                editor.apply();
+
                                 //remDbHelper.addTask(task);
 
                                 startActivity(intent);
@@ -160,14 +173,9 @@ public class ChoiserActivity extends AppCompatActivity {
     }
 
     private boolean done2(String subject, String choice, String substring) {
-        for (int i = 0; i < DoneTasks.done.size(); i++){
-            if (DoneTasks.done.get(i).getSubject().equals(subject)){
-                if (DoneTasks.done.get(i).getTask().equals(choice)){
-                    if (DoneTasks.done.get(i).getNumber().equals(substring))
-                        return false;
-                }
-            }
-        }
+        String key = subject + choice + substring;
+        if(mSettings.contains(key))
+            return false;
         return true;
     }
 
