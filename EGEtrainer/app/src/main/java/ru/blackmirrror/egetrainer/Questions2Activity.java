@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -105,6 +106,7 @@ public class Questions2Activity extends AppCompatActivity implements View.OnClic
                 question.setSubject(cursor.getString(cursor.getColumnIndex(QuizContract.QuestionTable.SUBJECT)));
                 question.setNumberQuestion(cursor.getInt(cursor.getColumnIndex(QuizContract.QuestionTable.NUMBER_QUESTION)));
                 question.setNumberNumberQuestion(cursor.getInt(cursor.getColumnIndex(QuizContract.QuestionTable.NUMBER_NUMBER_QUESTION)));
+                question.setQuestionId(cursor.getInt(cursor.getColumnIndex(QuizContract.QuestionTable._ID)));
 
                 questionList.add(question);
 
@@ -168,10 +170,22 @@ public class Questions2Activity extends AppCompatActivity implements View.OnClic
             {
                 // меняем изображение на кнопке
                 if (flag) {
-                    String query = "INSERT INTO " + QuizContract.FavouriteTable.TABLE_NAME_2 + "(" + QuizContract.FavouriteTable.USER_UID + ", " + QuizContract.FavouriteTable.QUESTION_ID  + ") "
-                            + "VALUES " + "(" + user.getUid() + ", " + QuizContract.QuestionTable._ID + ")";
+                    /*String query = "INSERT INTO " + QuizContract.FavouriteTable.TABLE_NAME_2 + "(" + QuizContract.FavouriteTable.USER_UID + ", " + QuizContract.FavouriteTable.QUESTION_ID  + ") "
+                            + "VALUES " + "(" + user.getUid() + ", " + QuizContract.QuestionTable._ID + ")";*/
                     imageButton.setImageResource(R.drawable.ic_baseline_favorite_24);
-                    mDb.rawQuery(query, null);
+                    ContentValues values = new ContentValues();
+                    values.put(QuizContract.FavouriteTable.USER_UID, user.getUid());
+                    values.put(QuizContract.FavouriteTable.QUESTION_ID, currentQuestion.getQuestionId());
+
+                    long newRowId = mDb.insert(QuizContract.FavouriteTable.TABLE_NAME,
+                            null, values);
+                    System.out.println(newRowId);
+                    // Insert the new row, returning the primary key value of the new row
+                    //mDb.rawQuery("INSERT INTO " + QuizContract.FavouriteTable.TABLE_NAME + "(" + QuizContract.FavouriteTable.USER_UID + ", " + QuizContract.FavouriteTable.QUESTION_ID  + ") "
+                    //        + "VALUES " + "('" + user.getUid() + "', '" + currentQuestion.getNumberQuestion() + "')", null);
+                    /*mDb.rawQuery("INSERT INTO " + QuizContract.FavouriteTable.TABLE_NAME_2 + "(" +  QuizContract.FavouriteTable.QUESTION_ID  + ") "
+                            + "VALUES " + "(" + QuizContract.QuestionTable._ID + ")", null);*/
+
                 }
                 else
                     // возвращаем первую картинку

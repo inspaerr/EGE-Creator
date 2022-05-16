@@ -37,6 +37,15 @@ public class QuizDbHelper extends SQLiteOpenHelper {
                 QuestionTable.NUMBER_NUMBER_QUESTION + " INTEGER" + ")";
         db.execSQL(SQL_CREATE_QUESTIONS_TABLE);
 
+        final String SQL_CREATE_FAVOURITE_TASKS = "CREATE TABLE " +
+                FavouriteTable.TABLE_NAME + " ( " +
+                FavouriteTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                FavouriteTable.USER_UID + "INTEGER, " +
+                FavouriteTable.QUESTION_ID + "INTEGER" + ")";
+
+        db.execSQL(SQL_CREATE_QUESTIONS_TABLE);
+        db.execSQL(SQL_CREATE_FAVOURITE_TASKS);
+
         fillQuestionsTable();
     }
 

@@ -24,7 +24,7 @@ public final class QuizContract {
         public static final String _ID = "_id";
     }
     public static class FavouriteTable implements BaseColumns {
-        public static final String TABLE_NAME_2 = "favourite_tasks";
+        public static final String TABLE_NAME = "favourite_tasks";
         public static final String COLUMN_ID = "ID";
         public static final String USER_UID = "USERUID";
         public static final String QUESTION_ID = "QUESTION_ID";
