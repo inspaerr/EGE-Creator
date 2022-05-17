@@ -24,20 +24,26 @@ public final class QuizContract {
         public static final String _ID = "_id";
     }
     public static class FavouriteTable implements BaseColumns {
-        public static final String TABLE_NAME_2 = "favourite_tasks";
+        public static final String TABLE_NAME = "favourite_tasks";
         public static final String COLUMN_ID = "ID";
         public static final String USER_UID = "USERUID";
         public static final String QUESTION_ID = "QUESTION_ID";
         public static final String QUESTION_SUBJ = "QUESTION_SUBJ";
     }
     public static class RemTable implements BaseColumns {
-
         public static final String TABLE_NAME = "tasks";
         public static final String _ID = "_id";
         public static final String SUBJECT = "subject";
         public static final String TASK = "task";
         public static final String NUMBER = "number";
         //public static final String UID = "uid";
+    }
+    public static class TaskSuccess implements BaseColumns {
+        public static final String TABLE_NAME = "task_success";
+        public static final String _ID = "_id";
+        public static final String SUBJECT = "subject";
+        public static final String SUCCESS = "success";
+        public static final String UNSUCCESS = "unsuccess";
     }
 
 }

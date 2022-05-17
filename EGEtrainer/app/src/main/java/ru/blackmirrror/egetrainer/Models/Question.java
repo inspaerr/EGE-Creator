@@ -1,6 +1,7 @@
 package ru.blackmirrror.egetrainer.Models;
 
 public class Question {
+    private int id;
     private String textQuestion;
     private String answer;
     private String subject;
@@ -60,4 +61,10 @@ public class Question {
     public void setNumberNumberQuestion(int numberNumberQuestion) {
         this.numberNumberQuestion = numberNumberQuestion;
     }
+    public void setQuestionId(int id) {
+        this.id = id;
+    }
+    public int getQuestionId() {
+        return this.id;
+    };
 }

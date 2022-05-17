@@ -5,6 +5,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -136,7 +137,7 @@ public class Questions2Activity extends AppCompatActivity implements View.OnClic
                 question.setSubject(cursor.getString(cursor.getColumnIndex(QuizContract.QuestionTable.SUBJECT)));
                 question.setNumberQuestion(cursor.getInt(cursor.getColumnIndex(QuizContract.QuestionTable.NUMBER_QUESTION)));
                 question.setNumberNumberQuestion(cursor.getInt(cursor.getColumnIndex(QuizContract.QuestionTable.NUMBER_NUMBER_QUESTION)));
-
+                question.setQuestionId(cursor.getInt(cursor.getColumnIndex(QuizContract.QuestionTable._ID)));
                 questionList.add(question);
 
             } while (cursor.moveToNext());
@@ -230,10 +231,15 @@ public class Questions2Activity extends AppCompatActivity implements View.OnClic
             {
                 // меняем изображение на кнопке
                 if (flag) {
-                    String query = "INSERT INTO " + QuizContract.FavouriteTable.TABLE_NAME_2 + "(" + QuizContract.FavouriteTable.USER_UID + ", " + QuizContract.FavouriteTable.QUESTION_ID  + ") "
-                            + "VALUES " + "(" + user.getUid() + ", " + QuizContract.QuestionTable._ID + ")";
+                    /*String query = "INSERT INTO " + QuizContract.FavouriteTable.TABLE_NAME_2 + "(" + QuizContract.FavouriteTable.USER_UID + ", " + QuizContract.FavouriteTable.QUESTION_ID  + ") "
+                            + "VALUES " + "(" + user.getUid() + ", " + QuizContract.QuestionTable._ID + ")";*/
                     imageButton.setImageResource(R.drawable.ic_baseline_favorite_24);
-                    mDb.rawQuery(query, null);
+                    ContentValues values = new ContentValues();
+                    values.put(QuizContract.FavouriteTable.USER_UID, user.getUid());
+                    values.put(QuizContract.FavouriteTable.QUESTION_ID, currentQuestion.getQuestionId());
+
+                    long newRowId = mDb.insert(QuizContract.FavouriteTable.TABLE_NAME,
+                            null, values);
                 }
                 else
                     // возвращаем первую картинку
@@ -356,13 +362,62 @@ public class Questions2Activity extends AppCompatActivity implements View.OnClic
 
     }
 
+    @SuppressLint("Range")
+    public void ensure_subj_exists(String subj){
+        Cursor cursor;
+        cursor = mDb.rawQuery(
+                "SELECT * FROM " + QuizContract.TaskSuccess.TABLE_NAME +
+                " WHERE " + QuizContract.TaskSuccess.SUBJECT + " = ?",
+                new String[]{subj});
+        if (cursor.moveToFirst()){
+            do {
+                int id = cursor.getInt(cursor.getColumnIndex(QuizContract.TaskSuccess._ID));
+                int a = cursor.getInt(cursor.getColumnIndex(QuizContract.TaskSuccess.SUCCESS));
+                int b = cursor.getInt(cursor.getColumnIndex(QuizContract.TaskSuccess.UNSUCCESS));
+                String s = cursor.getString(cursor.getColumnIndex(QuizContract.TaskSuccess.SUBJECT));
+                System.out.println(id);
+                System.out.println(a);
+                System.out.println(b);
+                System.out.println(s);
+            } while(cursor.moveToNext());
+        } else{
+            ContentValues values = new ContentValues();
+            values.put(QuizContract.TaskSuccess.SUBJECT, subj);
+            long id = mDb.insert(QuizContract.TaskSuccess.TABLE_NAME, null, values);
+            System.out.println(id);
+        }
+        cursor.close();
+    }
+
+    public void task_success(String subj){
+        mDb.execSQL(
+                "UPDATE " + QuizContract.TaskSuccess.TABLE_NAME + " SET " +
+                        QuizContract.TaskSuccess.SUCCESS + "=" + QuizContract.TaskSuccess.SUCCESS + "+1" +
+                        " WHERE " + QuizContract.TaskSuccess.SUBJECT + "=?",
+                new String[]{subj}
+        );
+    }
+    public void task_unsuccess(String subj){
+        mDb.execSQL(
+                "UPDATE " + QuizContract.TaskSuccess.TABLE_NAME + " SET " +
+                        QuizContract.TaskSuccess.UNSUCCESS + "=" + QuizContract.TaskSuccess.UNSUCCESS + "+1" +
+                        " WHERE " + QuizContract.TaskSuccess.SUBJECT + "=?",
+                new String[]{subj}
+        );
+    }
+
     private void onResActivity(){
-        //TODO активность
+        ensure_subj_exists(subjectt);
         Intent intent = new Intent(Questions2Activity.this, ResultActivity.class);
         intent.putExtra("questionTotalCount", questionTotalCount);
         for (int i = 0; i < questionTotalCount; i++) {
             intent.putExtra("a" + i, questionArrayList.get(i).getAnswer());
             intent.putExtra("ay" + i, answers.get(i));
+            if (questionArrayList.get(i).getAnswer().equals(answers.get(i))){
+                task_success(subjectt);
+            } else {
+                task_unsuccess(subjectt);
+            }
         }
         startActivity(intent);
     }
